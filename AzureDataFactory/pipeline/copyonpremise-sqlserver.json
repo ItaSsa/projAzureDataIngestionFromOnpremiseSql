@@ -1,0 +1,62 @@
+{
+	"name": "copyonpremise-sqlserver",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy-person-adress",
+				"description": "Copying table Person Adress from local sql AdventureWorks2019",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select \r\n\tAddressID,\t\r\n\tAddressLine1,\t\r\n\tAddressLine2,\t\r\n\tCity,\t\r\n\tStateProvinceID,\t\r\n\tPostalCode,\t\r\n\tConvert( VARCHAR(MAX), SpatialLocation)  as SpatialLocation,\t\r\n\trowguid,\t\r\n\tModifiedDate\r\nfrom Person.Address",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "personAdressParquet",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-02-07T19:20:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

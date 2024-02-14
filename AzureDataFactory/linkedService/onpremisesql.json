@@ -1,0 +1,23 @@
+{
+	"name": "onpremisesql",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=LAPTOP-7O1AKB14;Initial Catalog=AdventureWorks2019;User ID=itairauser2",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "pswd-sql"
+			}
+		},
+		"connectVia": {
+			"referenceName": "SHIR-itainplace",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

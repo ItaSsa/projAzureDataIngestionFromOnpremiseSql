@@ -1,0 +1,7 @@
+{
+	"name": "SHIR-itainplace",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "used to connect postgresql "
+	}
+}
