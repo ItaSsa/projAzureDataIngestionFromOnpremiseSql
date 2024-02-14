@@ -1,0 +1,17 @@
+{
+	"name": "Selecct to up serverless pool",
+	"properties": {
+		"content": {
+			"query": "use gold_db\nGO\nselect * from Person",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "gold_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "sp_createSqlServerlessViews_gold",
+	"properties": {
+		"content": {
+			"query": "Use gold_db\ngo\n\nCREATE OR ALTER PROC createSqlServerlessViews_gold \n  @viewName NVARCHAR(100)\nAS\nBEGIN\n    DECLARE @statement VARCHAR(max)\n    SET @statement = N'CREATE OR ALTER VIEW ' + @viewName + \n            ' AS\n            SELECT\n                *\n            FROM\n                OPENROWSET(\n                    BULK ''https://adlitainplaceprojects.dfs.core.windows.net/gold/Person/'+ @viewName +'/'',\n                    FORMAT = ''DELTA''\n                ) AS [result]'\n\n    EXEC(@statement)\nEND",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "gold_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

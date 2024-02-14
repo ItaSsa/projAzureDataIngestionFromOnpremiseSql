@@ -1,0 +1,17 @@
+{
+	"name": "scriptDdl_Create_View_Person",
+	"properties": {
+		"content": {
+			"query": "-- Creating View\nUse gold_db\ngo\nCREATE OR ALTER VIEW Person\nAS\nSELECT\n    *\nFROM\n    OPENROWSET(\n        BULK 'https://adlitainplaceprojects.dfs.core.windows.net/gold/Person/Person/',\n        FORMAT = 'DELTA'\n    ) AS [result]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "gold_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
